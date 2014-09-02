@@ -43,4 +43,8 @@ typedef NS_OPTIONS(NSUInteger, MLEmojiLabelLinkType) {
 
 - (CGSize)preferredSizeWithMaxWidth:(CGFloat)maxWidth;
 
+
+//#warning 这个方法如果有自定义表情正则的情况下无用
+//+ (CGSize)preferredSizeWithMaxWidth:(CGFloat)maxWidth forEmojiText:(NSString*)emojiText withFont:(UIFont*)font andNumberOfLines:(NSInteger)numberOfLines andLineBreakeMode:(NSLineBreakMode)lineBreakMode;
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "MLEmojiLabel.h"
+#import "MLEmojiCache.h"
 
 #pragma mark - 正则列表
 
@@ -255,15 +256,27 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
                 runBounds.origin.y = origins[lineIndex].y;
                 runBounds.origin.y -= runDescent;
                 
-                UIImage *image = [UIImage imageNamed:imageName];
                 runBounds.origin.y -= emojiOriginYOffset; //稍微矫正下。
-                CGContextDrawImage(c, runBounds, image.CGImage);
+                
+                [self drawEmojiForContext:c withImageName:imageName andDrawRect:runBounds];
             }
         }
         
         lineIndex++;
     }
     
+}
+
+- (void)drawEmojiForContext:(CGContextRef)c withImageName:(NSString*)imageName andDrawRect:(CGRect)rect
+{
+    CGImageRef imageRef = [[MLEmojiCache shareInstance]emojiCGImageCacheForImageName:imageName];
+    if (!imageRef) {
+#warning 这里应该把加载CG部分放到后台线程里最好
+        imageRef = [UIImage imageNamed:imageName].CGImage;
+        [[MLEmojiCache shareInstance] setEmojiCGImageCache:imageRef forImageName:imageName];
+    }
+    
+    CGContextDrawImage(c, rect, imageRef);
 }
 
 
@@ -316,9 +329,9 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
         if (!self.customEmojiRegularExpression) {
             //微信的表情没有结束符号,所以有可能会发现过长的只有头部才是表情的段，需要循环检测一次。微信最大表情特殊字符是8个长度，检测8次即可
             if (!imageName&&emojiKey.length>2) {
-                NSUInteger maxDetctIndex = emojiKey.length>8+2?8:emojiKey.length-2;
+                NSUInteger maxDetectIndex = emojiKey.length>8+2?8:emojiKey.length-2;
                 //从头开始检测是否有对应的
-                for (NSUInteger i=0; i<maxDetctIndex; i++) {
+                for (NSUInteger i=0; i<maxDetectIndex; i++) {
                     //                NSLog(@"%@",[emojiKey substringToIndex:3+i]);
                     imageName = emojiDict[[emojiKey substringToIndex:3+i]];
                     if (imageName) {
@@ -439,6 +452,27 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     CGSize size = [MLEmojiLabel sizeThatFitsAttributedString:self.attributedText withConstraints:CGSizeMake(maxWidth, CGFLOAT_MAX) limitedToNumberOfLines:self.numberOfLines];
     return size;
 }
+
+static inline MLEmojiLabel * kProtypeEmojiLabel() {
+    static MLEmojiLabel *_protypeEmojiLabel = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _protypeEmojiLabel = [MLEmojiLabel new];
+    });
+    
+    return _protypeEmojiLabel;
+}
+
+// 可能有其他影响高度的参数,发现了再处理吧
+//+ (CGSize)preferredSizeWithMaxWidth:(CGFloat)maxWidth forEmojiText:(NSString*)emojiText withFont:(UIFont*)font andNumberOfLines:(NSInteger)numberOfLines andLineBreakeMode:(NSLineBreakMode)lineBreakMode
+//{
+//    MLEmojiLabel *emojiLabel = kProtypeEmojiLabel();
+//    emojiLabel.numberOfLines = numberOfLines;
+//    emojiLabel.lineBreakMode = lineBreakMode;
+//    emojiLabel.font = font;
+//    emojiLabel.emojiText = emojiText;
+//    return [emojiLabel preferredSizeWithMaxWidth:maxWidth];
+//}
 
 #pragma mark - setter
 - (void)setIsNeedAtAndPoundSign:(BOOL)isNeedAtAndPoundSign

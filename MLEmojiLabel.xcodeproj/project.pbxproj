@@ -136,6 +136,9 @@
 		36C4DBC319790BAA00731042 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 36C4DBC119790BAA00731042 /* README.md */; };
 		36E2DB311999DBC900F8AF41 /* expression.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36E2DB301999DBC900F8AF41 /* expression.plist */; };
 		36E2DB331999DBCF00F8AF41 /* expression_custom.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36E2DB321999DBCF00F8AF41 /* expression_custom.plist */; };
+		36EAC19719B5B7A70083A5F1 /* EmojiTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EAC19619B5B7A70083A5F1 /* EmojiTableViewController.m */; };
+		36EAC19A19B5BA4E0083A5F1 /* EmojiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EAC19919B5BA4E0083A5F1 /* EmojiTableViewCell.m */; };
+		36EAC19D19B5C06C0083A5F1 /* MLEmojiCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EAC19C19B5C06C0083A5F1 /* MLEmojiCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -285,6 +288,12 @@
 		36C4DBC119790BAA00731042 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		36E2DB301999DBC900F8AF41 /* expression.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = expression.plist; sourceTree = "<group>"; };
 		36E2DB321999DBCF00F8AF41 /* expression_custom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = expression_custom.plist; path = MLEmoji/expression_custom.plist; sourceTree = SOURCE_ROOT; };
+		36EAC19519B5B7A60083A5F1 /* EmojiTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiTableViewController.h; sourceTree = "<group>"; };
+		36EAC19619B5B7A70083A5F1 /* EmojiTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiTableViewController.m; sourceTree = "<group>"; };
+		36EAC19819B5BA4E0083A5F1 /* EmojiTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiTableViewCell.h; sourceTree = "<group>"; };
+		36EAC19919B5BA4E0083A5F1 /* EmojiTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiTableViewCell.m; sourceTree = "<group>"; };
+		36EAC19B19B5C06C0083A5F1 /* MLEmojiCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLEmojiCache.h; sourceTree = "<group>"; };
+		36EAC19C19B5C06C0083A5F1 /* MLEmojiCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLEmojiCache.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -358,6 +367,10 @@
 				364A89351929B07200BAFB8C /* ViewController.m */,
 				364A89371929B07200BAFB8C /* Images.xcassets */,
 				364A89261929B07200BAFB8C /* Supporting Files */,
+				36EAC19519B5B7A60083A5F1 /* EmojiTableViewController.h */,
+				36EAC19619B5B7A70083A5F1 /* EmojiTableViewController.m */,
+				36EAC19819B5BA4E0083A5F1 /* EmojiTableViewCell.h */,
+				36EAC19919B5BA4E0083A5F1 /* EmojiTableViewCell.m */,
 			);
 			path = MLEmojiLabel;
 			sourceTree = "<group>";
@@ -400,6 +413,8 @@
 				36C3B63E192B3D7A00B6063D /* Expression */,
 				36E2DB301999DBC900F8AF41 /* expression.plist */,
 				36C3B7DE192C6CEE00B6063D /* expressionImage.plist */,
+				36EAC19B19B5C06C0083A5F1 /* MLEmojiCache.h */,
+				36EAC19C19B5C06C0083A5F1 /* MLEmojiCache.m */,
 			);
 			path = MLEmoji;
 			sourceTree = SOURCE_ROOT;
@@ -735,7 +750,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36EAC19719B5B7A70083A5F1 /* EmojiTableViewController.m in Sources */,
 				364A89361929B07200BAFB8C /* ViewController.m in Sources */,
+				36EAC19D19B5C06C0083A5F1 /* MLEmojiCache.m in Sources */,
+				36EAC19A19B5BA4E0083A5F1 /* EmojiTableViewCell.m in Sources */,
 				364A89301929B07200BAFB8C /* AppDelegate.m in Sources */,
 				369EE2DF19AB2BE100A93160 /* MLEmojiLabel.m in Sources */,
 				364A892C1929B07200BAFB8C /* main.m in Sources */,

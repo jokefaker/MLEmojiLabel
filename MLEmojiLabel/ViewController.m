@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "MLEmojiLabel.h"
+#import "EmojiTableViewController.h"
 
 @interface ViewController ()<MLEmojiLabelDelegate>
 
@@ -137,5 +138,11 @@
             break;
     }
     
+}
+
+- (IBAction)clickTableView:(id)sender {
+    EmojiTableViewController *vc = [EmojiTableViewController new];
+    UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:vc];
+    [self presentViewController:navVC animated:YES completion:nil];
 }
 @end
