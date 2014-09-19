@@ -60,8 +60,9 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    cell.emojiText = kTempText;
-    
+    if (![cell.emojiText isEqualToString:kTempText]) {
+        cell.emojiText = kTempText;
+    }
     
     return cell;
 }
