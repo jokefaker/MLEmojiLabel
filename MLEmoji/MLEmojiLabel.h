@@ -30,9 +30,12 @@ typedef NS_OPTIONS(NSUInteger, MLEmojiLabelLinkType) {
 @interface MLEmojiLabel : TTTAttributedLabel
 
 @property (nonatomic, assign) BOOL disableEmoji; //禁用表情
-@property (nonatomic, assign) BOOL disableThreeCommon; //禁用电话，邮箱，连接三者
+@property (nonatomic, assign) BOOL disablePhone; //禁用电话
+@property (nonatomic, assign) BOOL disableMail; //禁用邮箱
+@property (nonatomic, assign) BOOL disableURL; //禁用连接
 
-@property (nonatomic, assign) BOOL isNeedAtAndPoundSign; //是否需要话题和@功能，默认为不需要
+@property (nonatomic, assign) BOOL disableAt; //禁用@
+@property (nonatomic, assign) BOOL disablePoundSign; //禁用话题
 
 @property (nonatomic, copy) NSString *customEmojiRegex; //自定义表情正则
 @property (nonatomic, copy) NSString *customEmojiPlistName; //xxxxx.plist 格式
