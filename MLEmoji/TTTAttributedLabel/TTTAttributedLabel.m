@@ -897,7 +897,7 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
     
     //MARK:molon修正，TTT的BUG，这时已经不需要设置yOffset
     // Compensate for y-offset of text rect from vertical positioning
-//    CGFloat yOffset = self.textInsets.top - [self textRectForBounds:self.bounds limitedToNumberOfLines:self.numberOfLines].origin.y;
+    //    CGFloat yOffset = self.textInsets.top - [self textRectForBounds:self.bounds limitedToNumberOfLines:self.numberOfLines].origin.y;
     //..
 
     CFIndex lineIndex = 0;
@@ -908,6 +908,14 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
         lineBounds.origin.x += origins[lineIndex].x;
         lineBounds.origin.y += origins[lineIndex].y;
 
+        
+        CGFloat maxRunDescent = 0.0f;
+        for (id glyphRun in (__bridge NSArray *)CTLineGetGlyphRuns((__bridge CTLineRef)line)) {
+            CGFloat runAscent = 0.0f;
+            CGFloat runDescent = 0.0f;
+            CTRunGetTypographicBounds((__bridge CTRunRef)glyphRun, CFRangeMake(0, 0), &runAscent, &runDescent, NULL);
+            maxRunDescent = MAX(runDescent, maxRunDescent);
+        }
         for (id glyphRun in (__bridge NSArray *)CTLineGetGlyphRuns((__bridge CTLineRef)line)) {
             NSDictionary *attributes = (__bridge NSDictionary *)CTRunGetAttributes((__bridge CTRunRef) glyphRun);
             CGColorRef strokeColor = (__bridge CGColorRef)[attributes objectForKey:kTTTBackgroundStrokeColorAttributeName];
@@ -939,13 +947,14 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
                 //MARK:molon 修正 去掉+yOffset
                 runBounds.origin.y = origins[lineIndex].y + rect.origin.y - fillPadding.bottom - rect.origin.y;
                 //..
-                runBounds.origin.y -= runDescent;
-
+                runBounds.origin.y -= maxRunDescent;
+                
                 // Don't draw higlightedLinkBackground too far to the right
                 if (CGRectGetWidth(runBounds) > CGRectGetWidth(lineBounds)) {
                     runBounds.size.width = CGRectGetWidth(lineBounds);
                 }
 
+                runBounds.size.height = CGRectGetHeight(lineBounds);
                 CGPathRef path = [[UIBezierPath bezierPathWithRoundedRect:CGRectInset(UIEdgeInsetsInsetRect(runBounds, self.linkBackgroundEdgeInset), lineWidth, lineWidth) cornerRadius:cornerRadius] CGPath];
 
                 CGContextSetLineJoin(c, kCGLineJoinRound);
