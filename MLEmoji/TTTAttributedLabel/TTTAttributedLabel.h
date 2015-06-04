@@ -403,6 +403,14 @@ afterInheritingLabelAttributesAndConfiguringWithBlock:(NSMutableAttributedString
 ///-----------------------------------
 @optional
 
+
+/**
+ *  Tells the delegate that user did tap the text(not a URL)---Jokefaker
+ *
+ *  @param label The label whose link was selected.
+ */
+- (void)labelSingleTapped:(TTTAttributedLabel *)label;
+
 /**
  Tells the delegate that the user did select a link to a URL.
  
