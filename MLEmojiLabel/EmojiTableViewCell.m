@@ -72,7 +72,6 @@
         
         _emojiLabel.textInsets = UIEdgeInsetsMake(10, 10, 10, 10);
         
-        _emojiLabel.isNeedAtAndPoundSign = YES;
         _emojiLabel.disableEmoji = NO;
         
         _emojiLabel.lineSpacing = 3.0f;
@@ -104,7 +103,6 @@
         protypeLabel.font = [UIFont systemFontOfSize:14.0f];
         protypeLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         protypeLabel.textInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-        protypeLabel.isNeedAtAndPoundSign = YES;
         protypeLabel.disableEmoji = NO;
         protypeLabel.lineSpacing = 3.0f;
         

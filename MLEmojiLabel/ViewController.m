@@ -66,7 +66,6 @@
         _emojiLabel1.delegate = self;
         _emojiLabel1.textAlignment = NSTextAlignmentLeft;
         _emojiLabel1.backgroundColor = [UIColor clearColor];
-        _emojiLabel1.isNeedAtAndPoundSign = YES;
         //        _emojiLabel1.disableThreeCommon = YES;
         //        _emojiLabel1.disableEmoji = YES;
         
